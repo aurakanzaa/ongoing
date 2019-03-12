@@ -43,11 +43,11 @@ class Lab extends CI_Controller
     {
         $data = array(
             'button' => 'Tambah',
-            'action' => site_url('jabatan/create_action'),
-	    'id_jabatan' => set_value('id_jabatan'),
+            'action' => site_url('lab/create_action'),
+	    'no_reg' => set_value('no_reg'),
 	    'nama_jabatan' => set_value('nama_jabatan'),
 	);
-        $this->template->load('template','jabatan/tbl_lab_form', $data);
+        $this->template->load('template','lab/tbl_lab_form', $data);
     }
     
     public function create_action() 
