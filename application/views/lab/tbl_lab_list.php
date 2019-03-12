@@ -18,15 +18,14 @@
                         <thead>
                            <tr>
                               <th width="30px">No</th>
-                              <th>Kode Lab</th>
-                              <th>Nama Dokter</th>
-                              <th>Jenis Kelamin</th>
-                              <th>Nomor Induk Dokter</th>
-                              <th>Tempat Lahir</th>
-                              <th>Tgl Lahir</th>
+                              <th>No Register</th>
+                              <th>No Rekmed</th>
+                              <th>Nama</th>
                               <th>Alamat</th>
-                              <th>Id Poli</th>
-                              <th>Kontak</th>
+                              <th>Tgl Pemeriksaan</th>
+                              <th>Nama Dokter</th>
+                              <th>Pengambilan Sampel</th>
+                              <th>Penyerahan Hasil</th>
                               <th width="200px">Action</th>
                            </tr>
                         </thead>
@@ -86,7 +85,7 @@
                {
                    "data": "kode_dokter",
                    "orderable": false
-               },{"data": "kode_dokter"},{"data": "nama_dokter"},{"data": "jenis_kelamin"},{"data": "nomor_induk_dokter"},{"data": "tempat_lahir"},{"data": "tgl_lahir"},{"data": "alamat"},{"data": "nama_poli"},{"data": "no_telp"},
+               },{"data": "kode_dokter"},{"data": "no_reg"},{"data": "no_rekamedis"},{"data": "nama_pasien"},{"data": "alamat"},{"data": "tgl_periksa"},{"data": "nama_dokter"},{"data": "tgl_ambil_sampel"},{"data": "tgl_penyerahan_hasil"},
                {
                    "data" : "action",
                    "orderable": false,
