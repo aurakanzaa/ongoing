@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Mar 12, 2019 at 06:09 PM
--- Server version: 5.7.25
--- PHP Version: 7.2.7
+-- Host: 127.0.0.1
+-- Generation Time: Mar 12, 2019 at 07:00 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `puskesmasmunjungan`
+-- Database: `puskesmas`
 --
 
 -- --------------------------------------------------------
@@ -2205,7 +2205,9 @@ INSERT INTO `tbl_hak_akses` (`id`, `id_user_level`, `id_menu`) VALUES
 (152, 20, 31),
 (153, 20, 33),
 (154, 20, 37),
-(155, 20, 52);
+(155, 20, 52),
+(156, 1, 58),
+(157, 1, 59);
 
 -- --------------------------------------------------------
 
@@ -2374,7 +2376,9 @@ INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `is_a
 (54, 'DATA RAWAT INAP', '#', 'fa fa-bed', 0, 'y'),
 (55, 'DATA KAMAR', 'datakamar', 'fa fa-user', 54, 'y'),
 (56, 'PASIEN RAWAT INAP', 'rawatinap/index', 'fa fa-user', 54, 'y'),
-(57, 'DATA SEWA KAMAR', 'pengeluarankamar', 'fa fa-bed', 54, 'y');
+(57, 'DATA SEWA KAMAR', 'pengeluarankamar', 'fa fa-bed', 54, 'y'),
+(58, 'OBAT NON PASIEN', 'obatnonpasien', 'fa fa-user', 40, 'y'),
+(59, 'Penanggung', 'penanggung', 'fa fa-user', 40, 'y');
 
 -- --------------------------------------------------------
 
@@ -2407,6 +2411,33 @@ INSERT INTO `tbl_obat` (`kode_obat`, `nama_obat`, `jenis_obat`, `dosis_aturan_ob
 ('PG-58', 'Pil Vitamin A', 'Suplemen', '3 x 1 Sehari', 'Strip', 1000),
 ('SD-65', 'Polivanol', 'Obat Tetes Luka', 'Setiap pakai 50 ml', 'Botol ', 10000),
 ('U11', 'Ultraflu', 'Tablet', '3x1', 'Butir', 50000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_obatnonpasien`
+--
+
+CREATE TABLE `tbl_obatnonpasien` (
+  `id_obatnonpasien` varchar(6) NOT NULL,
+  `no_trans` varchar(15) NOT NULL,
+  `supplier` varchar(50) NOT NULL,
+  `kode_obat` varchar(5) NOT NULL,
+  `nama_obat` varchar(50) NOT NULL,
+  `jenis_obat` varchar(50) NOT NULL,
+  `jumlah` int(4) NOT NULL,
+  `keterangan` varchar(50) NOT NULL,
+  `satuan` varchar(15) NOT NULL,
+  `tgl_transaksi` varchar(10) NOT NULL,
+  `kode_ruang` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_obatnonpasien`
+--
+
+INSERT INTO `tbl_obatnonpasien` (`id_obatnonpasien`, `no_trans`, `supplier`, `kode_obat`, `nama_obat`, `jenis_obat`, `jumlah`, `keterangan`, `satuan`, `tgl_transaksi`, `kode_ruang`) VALUES
+('1', 'B-190312-1', 'Randra', 'A-989', 'Salicyl', 'Bedak', 1, 'a', 'Buah', '12-03-2019', 'PU1');
 
 -- --------------------------------------------------------
 
@@ -2933,7 +2964,11 @@ CREATE TABLE `tbl_stok_obat` (
 --
 
 INSERT INTO `tbl_stok_obat` (`kode_obat`, `jumlah`, `satuan`) VALUES
-('bo67', 100, 'Butir');
+('bo67', 100, 'Butir'),
+('', 16, ''),
+('A-282', 10, ''),
+('acycs', 5, ''),
+('A-989', 19, '');
 
 -- --------------------------------------------------------
 
@@ -2955,6 +2990,27 @@ CREATE TABLE `tbl_supplier` (
 INSERT INTO `tbl_supplier` (`kode_supplier`, `nama_supplier`, `alamat`, `no_telpon`) VALUES
 ('AW-189', 'Novita', 'Perum Pemda', '082872878219'),
 ('B-2827', 'Bentoman', 'Johar', '0828728726');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tanggungobat`
+--
+
+CREATE TABLE `tbl_tanggungobat` (
+  `kode_ruang` varchar(25) NOT NULL,
+  `penanggung` varchar(50) NOT NULL,
+  `jabatan` varchar(30) NOT NULL,
+  `no_telp` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_tanggungobat`
+--
+
+INSERT INTO `tbl_tanggungobat` (`kode_ruang`, `penanggung`, `jabatan`, `no_telp`) VALUES
+('PU1', 'Maryono', 'Pegawai', '09090'),
+('PU2', 'Randra', 'Pegawai', '909090');
 
 -- --------------------------------------------------------
 
@@ -3132,6 +3188,12 @@ ALTER TABLE `tbl_obat`
   ADD PRIMARY KEY (`kode_obat`);
 
 --
+-- Indexes for table `tbl_obatnonpasien`
+--
+ALTER TABLE `tbl_obatnonpasien`
+  ADD PRIMARY KEY (`no_trans`);
+
+--
 -- Indexes for table `tbl_operasi`
 --
 ALTER TABLE `tbl_operasi`
@@ -3237,6 +3299,12 @@ ALTER TABLE `tbl_supplier`
   ADD PRIMARY KEY (`kode_supplier`);
 
 --
+-- Indexes for table `tbl_tanggungobat`
+--
+ALTER TABLE `tbl_tanggungobat`
+  ADD PRIMARY KEY (`kode_ruang`);
+
+--
 -- Indexes for table `tbl_tindakan`
 --
 ALTER TABLE `tbl_tindakan`
@@ -3274,7 +3342,7 @@ ALTER TABLE `tbl_bidang`
 -- AUTO_INCREMENT for table `tbl_hak_akses`
 --
 ALTER TABLE `tbl_hak_akses`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
 
 --
 -- AUTO_INCREMENT for table `tbl_jabatan`
@@ -3304,7 +3372,7 @@ ALTER TABLE `tbl_laboratorium`
 -- AUTO_INCREMENT for table `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
-  MODIFY `id_menu` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id_menu` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `tbl_penanganan_operasi`
