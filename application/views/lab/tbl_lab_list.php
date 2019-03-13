@@ -18,14 +18,11 @@
                         <thead>
                            <tr>
                               <th width="30px">No</th>
-                              <th>No Register</th>
-                              <th>No Rekmed</th>
-                              <th>Nama</th>
-                              <th>Alamat</th>
-                              <th>Tgl Pemeriksaan</th>
-                              <th>Nama Dokter</th>
-                              <th>Pengambilan Sampel</th>
-                              <th>Penyerahan Hasil</th>
+                              <th>ID Tindakan</th>
+                              <th>Nomor Rawat</th>
+                              <th>Nomor Rekam Medis</th>
+                              <th>Tanggal Periksa</th>
+                              <th>Pemeriksaan Lab</th>
                               <th width="200px">Action</th>
                            </tr>
                         </thead>
@@ -80,12 +77,12 @@
            },
            processing: true,
            serverSide: true,
-           ajax: {"url": "dokter/json", "type": "POST"},
+           ajax: {"url": "lab/json", "type": "POST"},
            columns: [
                {
-                   "data": "kode_dokter",
+                   "data": "id_riwayat_tindakan",
                    "orderable": false
-               },{"data": "kode_dokter"},{"data": "no_reg"},{"data": "no_rekamedis"},{"data": "nama_pasien"},{"data": "alamat"},{"data": "tgl_periksa"},{"data": "nama_dokter"},{"data": "tgl_ambil_sampel"},{"data": "tgl_penyerahan_hasil"},
+               },{"data": "id_riwayat_tindakan"},{"data": "no_rawat"},{"data": "no_rekamedis"},{"data": "tanggal"},{"data": "pemeriksaan_lab"},
                {
                    "data" : "action",
                    "orderable": false,

@@ -17,8 +17,9 @@ class Tbl_lab_model extends CI_Model
 // halo
     // datatables
     function json() {
-        $this->datatables->select('kode_obat,nama_obat,jenis_obat,dosis_aturan_obat,satuan,harga_jual');
-        $this->datatables->from('tbl_obat');
+        $this->datatables->select('id_riwayat_tindakan,no_rawat,no_rekamedis,tanggal,pemeriksaan_lab');
+        $this->datatables->where('pemeriksaan_lab !=','-');
+        $this->datatables->from('tbl_riwayat_tindakan');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_obat.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('lab/update/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
