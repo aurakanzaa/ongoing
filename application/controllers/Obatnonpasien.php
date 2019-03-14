@@ -208,6 +208,8 @@ class Obatnonpasien extends CI_Controller
                         FROM tbl_riwayat_tindakan as tr, tbl_pendaftaran as pd
                         WHERE pd.no_rawat and tr.no_rawat='$no_rawat'";
 
+    $sql_obatnonpasien = "SELECT * from tbl_obatnonpasien JOIN tbl_tanggungobat ON tbl_tanggungobat.kode_ruang = tbl_obatnonpasien.kode_ruang";
+
         $this->load->library('pdf');
         $pdf = new FPDF('l', 'mm', array(345,340));
         // membuat halaman baru
@@ -231,22 +233,24 @@ class Obatnonpasien extends CI_Controller
         $pdf->Cell(30, 7, '', 0, 1);
 
         $pdf->Cell(70, 7, '', 0, 0, 'C');
-        $pdf->Cell(190, 7, 'Laporan Data Pengadaan Obat', 0, 1, 'C');
+        $pdf->Cell(190, 7, 'Laporan Data Pengeluaran Obat Non Pasien', 0, 1, 'C');
+        $pdf->Cell(30, 7, '', 0, 1);
 
 
 
 
         //tabel hasil rekam medik
         $pdf->Cell(1,7, '',0,0,'C');
-        $pdf->Cell(35, 7, 'No. Trans  ', 1, 0, 'C');
-        $pdf->Cell(45, 7, 'Nama Supplier  ', 1, 0, 'C');
-        $pdf->Cell(75, 7, 'Nama Obat  ', 1, 0, 'C');
-        $pdf->Cell(49, 7, 'Jenis Obat  ', 1, 0, 'C');
-        $pdf->Cell(30, 7, 'Harga Beli  ', 1, 0, 'C');
-        // $pdf->Cell(30, 7, 'Harga Jual  ', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'No. Trans  ', 1, 0, 'C');
+        $pdf->Cell(35, 7, 'Nama Supplier  ', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Kode Obat  ', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Nama Obat  ', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Jenis Obat  ', 1, 0, 'C');
         $pdf->Cell(30, 7, 'Jumlah  ', 1, 0, 'C');
         $pdf->Cell(30, 7, 'Satuan  ', 1, 0, 'C');
-        $pdf->Cell(30, 7, 'Total  ', 1, 1, 'C');
+        $pdf->Cell(30, 7, 'Tgl. Trans  ', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Tujuan  ', 1, 0, 'C');
+        $pdf->Cell(30, 7, 'Keterangan  ', 1, 1, 'C');
 
 
 
@@ -254,18 +258,27 @@ class Obatnonpasien extends CI_Controller
 
 
 
-        $resep = $this->db->query($sql_data_resep)->result();
-        foreach ($resep as $r) {
+        $nonpasien = $this->db->query($sql_obatnonpasien)->result();
+        foreach ($nonpasien as $n) {
         $pdf->Cell(1,7, '',0,0,'C');
-        $pdf->Cell(35, 7, $r->no_trans, 1, 0, 'C');
-        $pdf->Cell(45, 7, $r->supplier, 1, 0, 'C');
-        $pdf->Cell(75, 7, $r->nama_obat, 1, 0, 'C');
-        $pdf->Cell(49, 7, $r->jenis_obat, 1, 0, 'C');
-        $pdf->Cell(30, 7, $r->harga_beli, 1, 0, 'C');
-        // $pdf->Cell(30, 7, $r->harga_jual, 1, 0, 'C');
-        $pdf->Cell(30, 7, $r->jumlah, 1, 0, 'C');
-        $pdf->Cell(30, 7, $r->satuan, 1, 0, 'C');
-        $pdf->Cell(30, 7, $r->total, 1, 1, 'C');
+        $pdf->Cell(30, 7, $n->no_trans, 1, 0, 'C');
+        $pdf->Cell(35, 7, $n->supplier, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->kode_obat, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->nama_obat, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->jenis_obat, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->jumlah, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->satuan, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->tgl_transaksi, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->kode_ruang, 1, 0, 'C');
+        $pdf->Cell(30, 7, $n->keterangan, 1, 1, 'C');
+        // $pdf->Cell(45, 7, $r->supplier, 1, 0, 'C');
+        // $pdf->Cell(75, 7, $r->nama_obat, 1, 0, 'C');
+        // $pdf->Cell(49, 7, $r->jenis_obat, 1, 0, 'C');
+        // $pdf->Cell(30, 7, $r->harga_beli, 1, 0, 'C');
+        // // $pdf->Cell(30, 7, $r->harga_jual, 1, 0, 'C');
+        // $pdf->Cell(30, 7, $r->jumlah, 1, 0, 'C');
+        // $pdf->Cell(30, 7, $r->satuan, 1, 0, 'C');
+        // $pdf->Cell(30, 7, $r->total, 1, 1, 'C');
 
 
 
