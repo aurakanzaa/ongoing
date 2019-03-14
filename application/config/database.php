@@ -76,8 +76,13 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
+<<<<<<< HEAD
 	'password' => '',
+	'database' => 'puskesmasmunjungan',
+=======
+	'password' => '12345',
 	'database' => 'puskesmas',
+>>>>>>> e0b8be3f0e5f59394448385b5e7a1adffb26a2e7
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

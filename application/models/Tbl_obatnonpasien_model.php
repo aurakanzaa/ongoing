@@ -21,7 +21,7 @@ class Tbl_obatnonpasien_model extends CI_Model
         $this->datatables->from('tbl_obatnonpasien');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_pengadaan_obat.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('obatnonpasien/cetak/$1'),'<i class="fa fa-print" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." ".anchor(site_url('obatnonpasien/delete/$1'),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'no_trans');
+        $this->datatables->add_column('action', anchor(site_url('obatnonpasien/cetakobatnonpasien/$1'),'<i class="fa fa-print" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." ".anchor(site_url('obatnonpasien/delete/$1'),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'no_trans');
         return $this->datatables->generate();
     }
 
