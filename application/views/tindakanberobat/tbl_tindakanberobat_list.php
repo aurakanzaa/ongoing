@@ -82,7 +82,7 @@
                 <td><?php echo $pendaftaran->status_periksa ?></td>
     			<td style="text-align:center" width="200px">
                     <?php 
-                    echo anchor(site_url('tindakanberobat/detail/'.$pendaftaran->no_rawat),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
+                    echo anchor(site_url('rawatinap/detail/'.$pendaftaran->no_rawat),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-danger btn-sm"'); 
     				if ($pendaftaran->status_periksa == "Belum Diperiksa") {
                         echo '  '; 
                         echo anchor(site_url('tindakanberobat/delete/'.$pendaftaran->no_rawat.'/'.$this->uri->segment(3)),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 

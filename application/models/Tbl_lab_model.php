@@ -6,8 +6,8 @@ if (!defined('BASEPATH'))
 class Tbl_lab_model extends CI_Model
 {
 
-    public $table = 'tbl_obat';
-    public $id = 'kode_obat';
+    public $table = 'lab';
+    public $id = 'no_reg';
     public $order = 'DESC';
 
     function __construct()
@@ -22,8 +22,8 @@ class Tbl_lab_model extends CI_Model
         $this->datatables->from('tbl_riwayat_tindakan');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_obat.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('lab/update/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
-                ".anchor(site_url('lab/delete/$1'),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'kode_obat');
+        $this->datatables->add_column('action', anchor(site_url('lab/details/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
+                ", 'no_reg');
         return $this->datatables->generate();
     }
 

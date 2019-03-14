@@ -61,26 +61,26 @@ class Rawatinap extends CI_Controller
         $this->template->load('template','tindakanberobat/tbl_tindakanberobat_list', $data);
     }
 
-    function detail($no_rekmed){
+    function detail($no_rekmedis){
 
-      $no_rawat = substr($this->uri->uri_string(3), 23);
-      $sql_no_rekmed = "SELECT no_rekamedis from tbl_pasien";
-      $sql_daftar = "SELECT pd.no_rekamedis, pd.no_rawat,ps.nama_pasien,pd.status_periksa FROM tbl_pendaftaran as pd, tbl_pasien as ps WHERE pd.no_rekamedis = ps.no_rekamedis and pd.no_rawat = '$no_rawat'";
-      $sql_penyakit = "SELECT pd.no_rekamedis, pd.no_rawat,dg.nama_penyakit FROM tbl_pendaftaran as pd, tbl_diagnosa_penyakit as dg WHERE pd.no_rekamedis and pd.no_rawat = '$no_rawat'";
-      $sql_poli_input_rekmed = "SELECT pd.no_rawat,pd.id_poli, p.nama_poli FROM tbl_pendaftaran as pd, tbl_poli as p WHERE pd.no_rawat = '$no_rawat' AND pd.id_poli = p.id_poli";
-      $no_rekmed = $this->db->query($sql_daftar)->row()->no_rekamedis; //untuk proses pengambilan data atribut no_rekamedis (yang diambil hanya data atribut itu saja)
-      $sql_data_tindakan = "SELECT rt.no_rawat,rt.no_rekamedis,rt.tanggal,rt.keluhan,rt.pemeriksaan_fisik,rt.pemeriksaan_lab,p.nama_poli, pkt.nama_penyakit, t.nama_tindakan, b.deskripsi FROM tbl_riwayat_tindakan as rt, tbl_tindakan as t, tbl_poli as p, icd as b, tbl_diagnosa_penyakit as pkt, tbl_pasien as pas WHERE pas.no_rekamedis = '$no_rekmed' AND rt.no_rekamedis = '$no_rekmed' AND rt.kode_tindakan = t.kode_tindakan AND rt.id_poli = p.id_poli AND rt.kode_penyakit = pkt.kode_diagnosa AND rt.kode_icd = b.kode_icd";
-      $sql_data_resep = "SELECT rt.nama_obat, rt.jenis_obat,rt.dosis_aturan_obat,rt.no_rawat,rt.tanggal, pkt.nama_pasien FROM tbl_resep_obat as rt, tbl_pasien as pkt WHERE rt.no_rawat = '$no_rawat' AND rt.no_rekamedis = pkt.no_rekamedis";
-
-      $data['pendaftaran'] = $this->db->query($sql_daftar)->row_array();
-      $data['penyakit'] = $this->db->query($sql_penyakit)->row_array();
-      $data['baca_poli'] = $this->db->query($sql_poli_input_rekmed)->row_array();
-      $data['no_rawat'] = $no_rawat;
-      $data['data_tindakan'] = $this->db->query($sql_data_tindakan)->result();
-      $data['data_resep'] = $this->db->query($sql_data_resep)->result();
-      //$data['nama_obat'] = $this->db->query($sql_nama_obat)->row_array();
-
-      $this->template->load('template', 'tindakanberobat/detail', $data);
+        $no_rawat = substr($this->uri->uri_string(3), 23);
+        $sql_no_rekmed = "SELECT no_rekamedis from tbl_pasien";
+        $sql_daftar = "SELECT pd.no_rekamedis, pd.no_rawat,ps.nama_pasien,pd.status_periksa,pd.status_pasien FROM tbl_pendaftaran as pd, tbl_pasien as ps WHERE pd.no_rekamedis = ps.no_rekamedis and pd.no_rawat = '$no_rekmedis'";
+        $sql_penyakit = "SELECT pd.no_rekamedis, pd.no_rawat,dg.nama_penyakit FROM tbl_pendaftaran as pd, tbl_diagnosa_penyakit as dg WHERE pd.no_rekamedis and pd.no_rawat = '$no_rekmedis'";
+        $sql_poli_input_rekmed = "SELECT pd.no_rawat,pd.id_poli, p.nama_poli FROM tbl_pendaftaran as pd, tbl_poli as p WHERE pd.no_rawat = '$no_rekmedis' AND pd.id_poli = p.id_poli";
+        // $no_rekmed = $this->db->query($sql_daftar)->row()->no_rekamedis; //untuk proses pengambilan data atribut no_rekamedis (yang diambil hanya data atribut itu saja)
+        $sql_data_tindakan = "SELECT * FROM tbl_tindakan_rawatinap JOIN tbl_poli ON tbl_tindakan_rawatinap.id_poli = tbl_poli.id_poli JOIN tbl_diagnosa_penyakit ON tbl_diagnosa_penyakit.kode_diagnosa = tbl_tindakan_rawatinap.kode_penyakit JOIN tbl_tindakan ON tbl_tindakan.kode_tindakan = tbl_tindakan_rawatinap.kode_tindakan JOIN icd ON icd.kode_icd = tbl_tindakan_rawatinap.kode_icd WHERE tbl_tindakan_rawatinap.no_rawat = '$no_rekmedis'";
+        $sql_data_resep = "SELECT rt.nama_obat, rt.jenis_obat,rt.dosis_aturan_obat,rt.no_rawat,rt.tanggal,rt.jumlah_obat, pkt.nama_pasien FROM tbl_resep_obat as rt, tbl_pasien as pkt WHERE rt.no_rawat = '$no_rawat' AND rt.no_rekamedis = pkt.no_rekamedis";
+  
+        $data['pendaftaran'] = $this->db->query($sql_daftar)->row_array();
+        $data['penyakit'] = $this->db->query($sql_penyakit)->row_array();
+        $data['baca_poli'] = $this->db->query($sql_poli_input_rekmed)->row_array();
+        $data['no_rawat'] = $no_rawat;
+        $data['data_tindakan'] = $this->db->query($sql_data_tindakan)->result();
+        $data['data_resep'] = $this->db->query($sql_data_resep)->result();
+        //$data['nama_obat'] = $this->db->query($sql_nama_obat)->row_array();
+  
+        $this->template->load('template', 'tindakanrawatinap/detail', $data);
     }
 
     public function checkout($no_rawat)
@@ -88,7 +88,7 @@ class Rawatinap extends CI_Controller
         $this->db->where('no_rawat', $no_rawat);
         $object = array('status_periksa' => 'Sudah Diperiksa', );
         $this->db->update('tbl_pendaftaran', $object);
-        redirect('tindakanberobat/detail/'.$no_rawat,'refresh');
+        redirect('tindakanrawatinap/detail/'.$no_rawat,'refresh');
     }
 
     function getNoRekamedis($namaPasien){
@@ -370,7 +370,7 @@ class Rawatinap extends CI_Controller
 
 
 
-   function periksa_action(){
+   function periksa_action($no_rekmed){
 
         $no_rawat = $this->input->post('no_rawat');
         $no_rekamedis = $this->input->post('no_rekamedis');
@@ -386,7 +386,7 @@ class Rawatinap extends CI_Controller
         $pemeriksaan_lab = $this->input->post('pemeriksaan_lab');
 
         $data = array(
-            'no_rawat' => $no_rawat,
+            'no_rawat' => $no_rekmed,
             'no_rekamedis' => $no_rekamedis,
             'id_poli' => $poli['id_poli'],
             'kode_penyakit' => $penyakit['kode_diagnosa'],
@@ -398,10 +398,10 @@ class Rawatinap extends CI_Controller
             'kode_icd' => $kode_icd
            );
 
-        $this->db->insert('tbl_riwayat_tindakan', $data);
+        $this->db->insert('tbl_tindakan_rawatinap', $data);
         $id_riwayat_tindakan = $this->db->insert_id();
 
-        redirect('tindakanberobat/detail/'.$no_rawat);
+        redirect('rawatinap/detail/'.$no_rekmed);
 
    }
 
