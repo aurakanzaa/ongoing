@@ -29,13 +29,19 @@ class Lab extends CI_Controller
         $row = $this->Tbl_lab_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_jabatan' => $row->id_jabatan,
-		'nama_jabatan' => $row->nama_jabatan,
+		'no_reg' => $row->no_reg,
+        'no_rekamedis' => $row->no_rekamedis,
+        'nama_pasien' => $row->nama_pasien,
+        'alamat' => $row->alamat,
+        'tgl_periksa' => $row->tgl_periksa,
+        'kode_dokter' => $row->kode_dokter,
+        'tgl_ambil_sampel' => $row->tgl_ambil_sampel,
+        'tgl_penyerahan_hasil' => $row->tgl_penyerahan_hasil,
 	    );
-            $this->template->load('template','jabatan/tbl_jabatan_read', $data);
+            $this->template->load('template','lab/tbl_lab_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('jabatan'));
+            redirect(site_url('lab'));
         }
     }
 
@@ -45,7 +51,15 @@ class Lab extends CI_Controller
             'button' => 'Tambah',
             'action' => site_url('lab/create_action'),
 	    'no_reg' => set_value('no_reg'),
-	    'nama_jabatan' => set_value('nama_jabatan'),
+        'nama_jabatan' => set_value('nama_jabatan'),
+        'no_reg' => set_value('no_reg'),
+        'no_rekamedis' => set_value('no_rekamedis'),
+        'nama_pasien' => set_value('nama_pasien'),
+        'alamat' => set_value('alamat'),
+        'tgl_periksa' => set_value('tgl_periksa'),
+        'kode_dokter' => set_value('kode_dokter'),
+        'tgl_ambil_sampel' => set_value('tgl_ambil_sampel'),
+        'tgl_penyerahan_hasil' => set_value('tgl_penyerahan_hasil'),
 	);
         $this->template->load('template','lab/tbl_lab_form', $data);
     }
@@ -58,14 +72,22 @@ class Lab extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama_jabatan' => $this->input->post('nama_jabatan',TRUE),
+            'nama_jabatan' => $this->input->post('nama_jabatan',TRUE),
+            'no_reg' => $this->input->post('no_reg', TRUE),
+            'no_rekamedis' => $this->input->post('no_rekamedis', TRUE),
+            'nama_pasien' => $this->input->post('nama_pasien', TRUE),
+            'alamat' => $this->input->post('alamat', TRUE),
+            'tgl_periksa' => $this->input->post('tgl_periksa', TRUE),
+            'kode_dokter' => $this->input->post('kode_dokter', TRUE),
+            'tgl_ambil_sampel' => $this->input->post('tgl_ambil_sampel', TRUE),
+            'tgl_penyerahan_hasil' => $this->input->post('tgl_penyerahan_hasil', TRUE),
 	    );
 
             $this->Tbl_lab_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success">Data Berhasil Masuk
             </div>');  
 
-            redirect(site_url('jabatan'));
+            redirect(site_url('lab'));
         }
     }
     
@@ -77,13 +99,21 @@ class Lab extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('jabatan/update_action'),
-		'id_jabatan' => set_value('id_jabatan', $row->id_jabatan),
-		'nama_jabatan' => set_value('nama_jabatan', $row->nama_jabatan),
+                'no_reg' => set_value('no_reg'),
+                'nama_jabatan' => set_value('nama_jabatan'),
+                'no_reg' => set_value('no_reg'),
+                'no_rekamedis' => set_value('no_rekamedis'),
+                'nama_pasien' => set_value('nama_pasien'),
+                'alamat' => set_value('alamat'),
+                'tgl_periksa' => set_value('tgl_periksa'),
+                'kode_dokter' => set_value('kode_dokter'),
+                'tgl_ambil_sampel' => set_value('tgl_ambil_sampel'),
+                'tgl_penyerahan_hasil' => set_value('tgl_penyerahan_hasil'),
 	    );
-            $this->template->load('template','jabatan/tbl_lab_form', $data);
+            $this->template->load('template','lab/tbl_lab_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('jabatan'));
+            redirect(site_url('lab'));
         }
     }
     
@@ -92,16 +122,24 @@ class Lab extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_jabatan', TRUE));
+            $this->update($this->input->post('no_reg', TRUE));
         } else {
             $data = array(
-		'nama_jabatan' => $this->input->post('nama_jabatan',TRUE),
+                
+                'no_reg' => $this->input->post('no_reg', TRUE),
+                'no_rekamedis' => $this->input->post('no_rekamedis', TRUE),
+                'nama_pasien' => $this->input->post('nama_pasien', TRUE),
+                'alamat' => $this->input->post('alamat', TRUE),
+                'tgl_periksa' => $this->input->post('tgl_periksa', TRUE),
+                'kode_dokter' => $this->input->post('kode_dokter', TRUE),
+                'tgl_ambil_sampel' => $this->input->post('tgl_ambil_sampel', TRUE),
+                'tgl_penyerahan_hasil' => $this->input->post('tgl_penyerahan_hasil', TRUE),
 	    );
 
-            $this->Tbl_lab_model->update($this->input->post('id_jabatan', TRUE), $data);
+            $this->Tbl_lab_model->update($this->input->post('no_reg', TRUE), $data);
              $this->session->set_flashdata('message', '<div class="alert alert-info">Data Berhasil Diupdate
             </div>');  
-            redirect(site_url('jabatan'));
+            redirect(site_url('lab'));
         }
     }
     
@@ -113,21 +151,21 @@ class Lab extends CI_Controller
             $this->Tbl_lab_model->delete($id);
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Berhasil Dihapus
             </div>');  
-            redirect(site_url('jabatan'));
+            redirect(site_url('lab'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('jabatan'));
+            redirect(site_url('lab'));
         }
     }
 
-    public function _rules() 
-    {
-	$this->form_validation->set_rules('nama_jabatan', 'nama jabatan', 'trim|required');
-    $this->form_validation->set_message('required', '{field} wajib diisi');
+    // public function _rules() 
+    // {
+	// $this->form_validation->set_rules('nama_jabatan', 'nama jabatan', 'trim|required');
+    // $this->form_validation->set_message('required', '{field} wajib diisi');
 
-	$this->form_validation->set_rules('id_jabatan', 'id_jabatan', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-    }
+	// $this->form_validation->set_rules('id_jabatan', 'id_jabatan', 'trim');
+	// $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    // }
 
     // public function excel()
     // {
