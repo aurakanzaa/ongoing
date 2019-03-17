@@ -19,7 +19,7 @@ class Tbl_rawat_inap_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
-     $this->db->join('tbl_pasien', 'tbl_pendaftaran.no_rekamedis = tbl_pasien.no_rekamedis');
+         $this->db->join('tbl_pasien', 'tbl_pendaftaran.no_rekamedis = tbl_pasien.no_rekamedis');
         $this->db->join('tbl_dokter', 'tbl_pendaftaran.kode_dokter_penanggung_jawab = tbl_dokter.kode_dokter');
         $this->db->join('tbl_poli', 'tbl_pendaftaran.id_poli = tbl_poli.id_poli');
         return $this->db->get($this->table)->result();

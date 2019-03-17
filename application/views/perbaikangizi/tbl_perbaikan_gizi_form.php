@@ -6,7 +6,7 @@
       </div>
       <form action="<?php echo $action; ?>" method="post">
         <div class="table-responsive">
-         <table class='table table-bordered>'        
+         <table class='table table-bordered>'  >      
          <tr>
             <td width='200'>Nama Anak <?php echo form_error('nama_anak') ?></td>
             <td><input type="text" class="form-control" name="nama_anak" id="nama_anak" placeholder="Nama Anak" value="<?php echo $nama_anak ?>" onkeyup="anakauto()" /></td>

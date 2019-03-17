@@ -17,24 +17,14 @@ class Tbl_lab_model extends CI_Model
 // halo
     // datatables
     function json() {
-        $this->datatables->select('no_reg, no_rekamedis, nama_pasien, alamat, tgl_periksa, kode_dokter, tgl_ambil_sampel, tgl_penyerahan_hasil');
-        $this->datatables->from('lab');
-        // $this->datatables->join('tbl_pendaftaran', 'lab.no_rekamedis = tbl_pendaftaran.no_rekamedis');
-        // $this->datatables->join('tbl_pasien', 'tbl_pendaftaran.no_rekamedis = tbl_pasien.no_rekamedis ');
-        // $this->datatables->join('lab_hematologi', 'lab.no_rekamedis = lab_hematologi.no_rekamedis');
-        // $this->datatables->join('lab_imunoserologi', 'lab.no_rekamedis = lab_imunoserologi.no_rekamedis');
-        // $this->datatables->join('lab_kimia_klinik', 'lab.no_rekamedis = lab_kimia_klinik.no_rekamedis');
-        // $this->datatables->join('lab_parasitologi', 'lab.no_rekamedis = lab_parasitologi.no_rekamedis');
-        // $this->datatables->join('tbl_dokter', 'lab.kode_dokter = tbl_dokter.kode_dokter');
-
-        // $this->datatables->select('id_riwayat_tindakan,no_rawat,no_rekamedis,tanggal,pemeriksaan_lab');
-        // $this->datatables->where('pemeriksaan_lab !=','-');
-        // $this->datatables->from('tbl_riwayat_tindakan');
+        $this->datatables->select('id_riwayat_tindakan,no_rawat,no_rekamedis,tanggal,pemeriksaan_lab');
+        $this->datatables->where('pemeriksaan_lab !=','-');
+        $this->datatables->from('tbl_riwayat_tindakan');
         
         //add this line for join
         //$this->datatables->join('table2', 'tbl_obat.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('lab/details/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
-                ", 'no_reg');
+        $this->datatables->add_column('action', anchor(site_url('lab/create/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
+                ", 'id_riwayat_tindakan');
         return $this->datatables->generate();
     }
 
@@ -48,10 +38,29 @@ class Tbl_lab_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
+        $this->db->join('tbl_pendaftaran', 'lab.no_rekamedis = tbl_pendaftaran.no_rekamedis');
+        $this->db->join('tbl_pasien', 'tbl_pendaftaran.no_rekamedis = tbl_pasien.no_rekamedis ');
+        $this->db->join('lab_hematologi', 'lab.no_rekamedis = lab_hematologi.no_rekamedis');
+        $this->db->join('lab_imunoserologi', 'lab.no_rekamedis = lab_imunoserologi.no_rekamedis');
+        $this->db->join('lab_kimia_klinik', 'lab.no_rekamedis = lab_kimia_klinik.no_rekamedis');
+        $this->db->join('lab_parasitologi', 'lab.no_rekamedis = lab_parasitologi.no_rekamedis');
+        $this->db->join('tbl_dokter', 'lab.kode_dokter = tbl_dokter.kode_dokter');
+
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        return $this->db->get('lab')->row();
+
+        
     }
     
+    function get_by_no_rekammedis($no_rekamedis)
+    {
+         $this->db->where($this->no_rekamedis, $no_rekamedis);
+        $this->db->join('tbl_pasien', 'tbl_pendaftaran.no_rekamedis = tbl_pasien.no_rekamedis');
+        $this->db->join('tbl_dokter', 'tbl_pendaftaran.kode_dokter_penanggung_jawab = tbl_dokter.kode_dokter');
+        // $this->db->join('tbl_poli', 'tbl_pendaftaran.id_poli = tbl_poli.id_poli');
+        return $this->db->get($this->table)->row(); 
+    }
+
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('no_reg', $q);

@@ -18,7 +18,7 @@
                         <thead>
                            <tr>
                               <th width="30px">No</th>
-                              <th>No Reg</th>
+                              <!-- <th>No Reg</th>
                               <th>Rekamedis</th>
                               <th>Nama</th>
                               <th>Alamat</th>
@@ -26,13 +26,13 @@
                               <th>Nama Dokter</th>
                               <th>Tgl Ambil Sampel</th>
                               <th>Tgl Penyerahan Hasil</th>
-                              <th width="200px">Action</th>
-                              <!-- <th>ID Tindakan</th>
+                              <th width="200px">Action</th> -->
+                              <th>ID Tindakan</th>
                               <th>Nomor Rawat</th>
                               <th>Nomor Rekam Medis</th>
                               <th>Tanggal Periksa</th>
                               <th>Pemeriksaan Lab</th>
-                              <th width="200px">Action</th> -->
+                              <th width="200px">Action</th>
                            </tr>
                         </thead>
                      </table>
@@ -89,11 +89,11 @@
            ajax: {"url": "lab/json", "type": "POST"},
            columns: [
                {
-                   "data": "no_reg",
-                // "data": "id_riwayat_tindakan",
+                //    "data": "no_reg",
+                "data": "id_riwayat_tindakan",
                    "orderable": false
-               },{"data": "no_reg"},{"data": "no_rekamedis"},{"data": "nama_pasien"},{"data": "alamat"},{"data": "tgl_periksa"},{"data": "kode_dokter"}, {"data": "tgl_ambil_sampel"},{"data": "tgl_penyerahan_hasil"},
-                // },{"data": "id_riwayat_tindakan"},{"data": "no_rawat"},{"data": "no_rekamedis"},{"data": "tanggal"},{"data": "pemeriksaan_lab"},
+            //    },{"data": "no_reg"},{"data": "no_rekamedis"},{"data": "nama_pasien"},{"data": "alamat"},{"data": "tgl_periksa"},{"data": "kode_dokter"}, {"data": "tgl_ambil_sampel"},{"data": "tgl_penyerahan_hasil"},
+                },{"data": "id_riwayat_tindakan"},{"data": "no_rawat"},{"data": "no_rekamedis"},{"data": "tanggal"},{"data": "pemeriksaan_lab"},
                {
                    "data" : "action",
                    "orderable": false,

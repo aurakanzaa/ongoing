@@ -9,31 +9,31 @@
          <table class='table table-bordered'>
             <tr>
                <td width='200'>No Register <?php echo form_error('no_reg') ?></td>
-               <td><input readonly type="text" class="form-control" name="no_reg" id="no_reg"  /></td>
+               <td><input readonly type="text" class="form-control" value="<?php echo $no_reg ?>" id="no_reg"  /></td>
             </tr>
             <tr>
                <td width='200'>Tgl Pemerikasaan <?php echo form_error('tgl_periksa') ?></td>
-               <td><input type="date" class="form-control" name="tgl_periksa" id="tgl_periksa" /></td>
+               <td><input type="date" class="form-control" name="tgl_periksa" id="tgl_periksa"/></td>
             </tr>
             <tr>
                <td width='200'>No RM <?php echo form_error('no_rekamedis') ?></td>
-               <td><input type="text" class="form-control" name="no_rekamedis" id="no_rekamedis" placeholder="No Rekamedis"  /></td>
+               <td><input type="text" class="form-control" name="no_rekamedis" id="no_rekamedis" placeholder="No Rekamedis"  value="<?php echo $no_rekamedis; ?>"/></td>
             </tr>
             <tr>
                <td width='200'>Nama <?php echo form_error('nama_pasien') ?></td>
-               <td><input type="text" class="form-control" name="nama_pasien" id="nama_pasien" placeholder="Nama Pasien"  /></td>
+               <td><input type="text" class="form-control" name="nama_pasien" id="nama_pasien" placeholder="Nama Pasien"  value="<?php echo $nama_pasien; ?>"/></td>
             </tr>
             <tr>
                <td width='200'>Alamat <?php echo form_error('alamat') ?></td>
-               <td><input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat"  /></td>
+               <td><input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat"  value="<?php echo $alamat; ?>"/></td>
             </tr>
             <tr>
                <td width='200'>Jenis Kelamin <?php echo form_error('jenis_kelamin') ?></td>
-               <td><input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin" placeholder="Jenis Kelamin"  /></td>
+               <td><input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin" placeholder="Jenis Kelamin" value="<?php echo $jenis_kelamin; ?>" /></td>
             </tr>
             <tr>
                <td width='200'>Dokter Pengirim <?php echo form_error('nama_dokter') ?></td>
-               <td><input type="text" class="form-control" name="nama_dokter" id="nama_dokter" placeholder="Nama Dokter"  /></td>
+               <td><input type="text" class="form-control" name="nama_dokter" id="nama_dokter" placeholder="Nama Dokter"  value="<?php echo $kode_dokter; ?>"/></td>
             </tr>
             <tr>
                <td width='200'>Pengambilan Sampel <?php echo form_error('tgl_ambil_sampel') ?></td>
@@ -48,7 +48,7 @@
                <td></td>
                <td> 
                   <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
-                  <a href="<?php echo site_url('dataobat') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
+                  <a href="<?php echo site_url('lab') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
                </td>
             </tr>
          </table>
@@ -70,12 +70,12 @@
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-addon">L</span>
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="hb_l" placeholder="">
                                     <span class="input-group-addon">(13.0-16.0 gr%)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">P</span>
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="hb_p" placeholder="">
                                     <span class="input-group-addon">(12.0-14.0 gr%)</span>
                                 </div>
                                 
@@ -87,7 +87,7 @@
                             <td width='100'>Leucosit <?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
                             <td>
                                 <div class="input-group">
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="leucosit" placeholder="">
                                     <span class="input-group-addon">(4.000-10.000 Sel/ul)</span>
                                 </div>
                                 
@@ -100,12 +100,12 @@
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-addon">L</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="eritrosit_l" placeholder="">
                                     <span class="input-group-addon">(4.5-5.5 Juta/ul)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">P</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="eritrosit_p" placeholder="">
                                     <span class="input-group-addon">(4.0-5.0 Juta/ul)</span>
                                 </div>
                                 
@@ -118,12 +118,12 @@
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-addon">L</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="led_l" placeholder="">
                                     <span class="input-group-addon">(0-10 jam)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">P</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="led_p" placeholder="">
                                     <span class="input-group-addon">(0-20 jam)</span>
                                 </div>
                                 
@@ -136,7 +136,7 @@
                             <td>
                                 <div class="input-group">
                                     
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="trombosit" placeholder="">
                                     <span class="input-group-addon">(150-400 Ribu/ul)</span>
                                 </div>
                             </td>
@@ -148,12 +148,12 @@
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-addon">L</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="hematosit_l" placeholder="">
                                     <span class="input-group-addon">(40-48%)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">P</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="hematosit_p" placeholder="">
                                     <span class="input-group-addon">(37-43%)</span>
                                 </div>
                             </td>
@@ -165,7 +165,7 @@
                             <td>
                                 <div class="input-group">
                                     <!-- <span class="input-group-addon">L</span> -->
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="mvc" placeholder="">
                                     <span class="input-group-addon">(90.3 fl)</span>
                                 </div>
                                 
@@ -178,7 +178,7 @@
                             <td>
                                 <div class="input-group">
                                     <!-- <span class="input-group-addon">L</span> -->
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="mch" placeholder="">
                                     <span class="input-group-addon">(28.8 pg)</span>
                                 </div>
                                 
@@ -191,7 +191,7 @@
                             <td>
                                 <div class="input-group">
                                     <!-- <span class="input-group-addon">L</span> -->
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="mchc" placeholder="">
                                     <span class="input-group-addon">(32.0 g/Dl)</span>
                                 </div>
                             </td>
@@ -203,32 +203,32 @@
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-addon">1. Eosinofil</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="eosinofil" placeholder="">
                                     <span class="input-group-addon">(1-2%)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">2. Basofil</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="basofil" placeholder="">
                                     <span class="input-group-addon">(0-1%)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">3. Stab</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="stab" placeholder="">
                                     <span class="input-group-addon">(3-5%)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">4. Segmen</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="segmen" placeholder="">
                                     <span class="input-group-addon">(50-70%)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">5. Limposit</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="limposit" placeholder="">
                                     <span class="input-group-addon">(20-40%)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">6. Monosit</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="monosit" placeholder="">
                                     <span class="input-group-addon">(1-15%)</span>
                                 </div>
                                 
@@ -250,22 +250,22 @@
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-addon">1. S Typhi H</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="widal_h" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">2. S Typhi O</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="widal_o" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div><br>
                                 <div class="input-group">
                                     <span class="input-group-addon">3. S Typhi PA</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="text" class="form-control" name="widal_pa" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div><br>
                                 <div class="input-group">
-                                    <span class="input-group-addon">4. S Typhi B</span>
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="">
+                                    <span class="input-group-addon">4. S Typhi PB</span>
+                                    <input id="email" type="text" class="form-control" name="widal_pb" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div><br>
                                 
@@ -278,7 +278,7 @@
                             <td width='100'>HIV <?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
                             <td>
                                 <div class="input-group">
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="hiv" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div>
                                 
@@ -290,7 +290,7 @@
                             <td width='100'>PPT<?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
                             <td>
                                 <div class="input-group">
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="ppt" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div>
                                 
@@ -302,7 +302,7 @@
                             <td width='100'>Gol Darah <?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
                             <td>
                                 <div class="input-group">
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="goldar" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div>
                                 
@@ -315,7 +315,7 @@
                             <td width='100'>HbsAg <?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
                             <td>
                                 <div class="input-group">
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="hbsag" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div>
                                 
@@ -325,10 +325,22 @@
                         <!-- 6 -->
                         <tr>
                             <td width='20'>6.</td>
+                            <td width='100'>Syphilis <?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
+                            <td>
+                                <div class="input-group">
+                                    <input id="email" type="number" class="form-control" name="syphilis" placeholder="">
+                                    <span class="input-group-addon">(Negatif)</span>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        <!-- 7 -->
+                        <tr>
+                            <td width='20'>7.</td>
                             <td width='100'>lgG/lgM & NSl <?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
                             <td>
                                 <div class="input-group">
-                                    <input id="email" type="number" class="form-control" name="email" placeholder="">
+                                    <input id="email" type="number" class="form-control" name="nsi" placeholder="">
                                     <span class="input-group-addon">(Negatif)</span>
                                 </div>
                                 

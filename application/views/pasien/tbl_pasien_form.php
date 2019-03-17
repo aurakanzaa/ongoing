@@ -21,7 +21,7 @@
       <tr><td width='200'>Status Pasien <?php echo form_error('status_pasien') ?></td><td>
        
     <select id="status_pasien" name="status_pasien" onchange="tampilkan()" class="form-control">
-        <option value="" disabled="disabled" selected/>Pilih</option>
+        <option value="" disabled="disabled" selected>Pilih</option>
         <option value="BPJS">BPJS</option>
         <option value="Umum">Umum</option>
   
@@ -34,7 +34,7 @@
       <tr><td width='200'>Desa <?php echo form_error('desa') ?></td><td>
        
        <select id="desa" name="desa" onchange="tampilkan()" class="form-control">
-           <option value="" disabled="disabled" selected/>Pilih</option>
+           <option value="" disabled="disabled" selected>Pilih</option>
            <option value="Bangun">Bangun</option>
            <option value="Bendoroto">Bendoroto</option>
            <option value="Besuki">Besuki</option>
