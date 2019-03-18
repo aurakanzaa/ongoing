@@ -18,6 +18,34 @@ class Lab extends CI_Controller
     {
         $this->template->load('template','lab/tbl_lab_list');
     } 
+
+    // FORM LAB ===================================================
+    public function hematologi()
+    {
+        $this->template->load('template','lab/hematologi_form');
+    } 
+
+    public function imuno()
+    {
+        $this->template->load('template','lab/imuno_form');
+    }
+
+    public function kimia()
+    {
+        $this->template->load('template','lab/kimiaklinik_form');
+    }
+
+    public function urine()
+    {
+        $this->template->load('template','lab/urine_form');
+    }
+
+    public function parasitologi()
+    {
+        $this->template->load('template','lab/parasitologi_form');
+    }
+    // FORM LAB END ==========================================================
+
     
     public function json() {
         header('Content-Type: application/json');
@@ -28,8 +56,8 @@ class Lab extends CI_Controller
 		$session_data = $this->session->userdata('sesslogin');
         
         // load model
-        $this->load->model('Tbl_pendaftaran_model');
-        $data["pendaftaran"] = $this->Tbl_pendaftaran_model->selectPendaftaran($pendaftaran);
+        // $this->load->model('Tbl_pendaftaran_model');
+        // $data["pendaftaran"] = $this->Tbl_pendaftaran_model->selectPendaftaran($pendaftaran);
 
 		$this->load->helper('url','form');	
         $this->load->library('form_validation');

@@ -9,7 +9,7 @@
          <table class='table table-bordered'>
             <tr>
                <td width='200'>No Register</td>
-               <td><?php echo $lab[0]->no_reg ?></td>
+               <!-- <td><?php echo $lab[0]->no_reg ?></td> -->
             </tr>
             <tr>
                <td width='200'>Tgl Pemerikasaan</td>
@@ -17,23 +17,23 @@
             </tr>
             <tr>
                <td width='200'>No RM</td>
-               <td><?php echo $row['no_rekamedis'] ?></td>
+               <!-- <td><?php echo $row['no_rekamedis'] ?></td> -->
             </tr>
             <tr>
                <td width='200'>Nama</td>
-               <td><?php echo $pendaftaran['nama_pasien'] ?></td>
+               <!-- <td><?php echo $pendaftaran['nama_pasien'] ?></td> -->
             </tr>
             <tr>
                <td width='200'>Alamat</td>
-               <td><?php echo $pendaftaran['alamat'] ?></td>
+               <!-- <td><?php echo $pendaftaran['alamat'] ?></td> -->
             </tr>
             <tr>
                <td width='200'>Jenis Kelamin</td>
-               <td><?php echo $pendaftaran['jenis_kelamin'] ?></td>
+               <!-- <td><?php echo $pendaftaran['jenis_kelamin'] ?></td> -->
             </tr>
             <tr>
                <td width='200'>Dokter Pengirim</td>
-               <td><?php echo $pendaftaran['nama_dokter'] ?></td>
+               <!-- <td><?php echo $pendaftaran['nama_dokter'] ?></td> -->
             </tr>
             <tr>
                <td width='200'>Pengambilan Sampel</td>
@@ -53,6 +53,30 @@
             </tr>
          </table>
 
+         <div class="row">
+            <div class="col-lg-12">
+                
+                
+                <table class="table table-bordered table-hover responsive">
+                    <thead>
+                        <tr>
+                            <td>
+                                <a href="<?php echo site_url('lab/hematologi')?>" class="btn btn-lg btn-info">HEMATOLOGI</a>
+                                <a href="<?php echo site_url('lab/imuno')?>" class="btn btn-lg btn-primary">IMUNO SEROLOGI</a>
+                                <a href="<?php echo site_url('lab/kimia')?>" class="btn btn-lg btn-default" style="background-color:#a40a3c; color:white;"> KIMIA KLINIK	</a>
+                                <a href="<?php echo site_url('lab/urine')?>" class="btn btn-lg btn-success">URINE LENGKAP</a>
+                                <a href="<?php echo site_url('lab/parasitologi')?>" class="btn btn-lg btn-warning">PARASITOLOGI DAN BAKTERIOLOGI</a>
+                        
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+                
+                
+            </div>
+         </div>
+
+        
          <div class="row">
             <div class="col-lg-12">
                 <!-- LEFT -->
