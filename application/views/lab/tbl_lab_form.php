@@ -4,50 +4,50 @@
       <div class="box-header with-border">
          <h3 class="box-title">INPUT DATA OBAT</h3>
       </div>
-      <form action="<?php echo $action; ?>" method="post">
+      <?php echo form_open('Lab/create/'); ?> 
          <!-- halo -->
          <table class='table table-bordered'>
             <tr>
-               <td width='200'>No Register <?php echo form_error('no_reg') ?></td>
-               <td><input readonly type="text" class="form-control" value="<?php echo $no_reg ?>" id="no_reg"  /></td>
+               <td width='200'>No Register</td>
+               <td><?php echo $lab[0]->no_reg ?></td>
             </tr>
             <tr>
-               <td width='200'>Tgl Pemerikasaan <?php echo form_error('tgl_periksa') ?></td>
+               <td width='200'>Tgl Pemerikasaan</td>
                <td><input type="date" class="form-control" name="tgl_periksa" id="tgl_periksa"/></td>
             </tr>
             <tr>
-               <td width='200'>No RM <?php echo form_error('no_rekamedis') ?></td>
-               <td><input type="text" class="form-control" name="no_rekamedis" id="no_rekamedis" placeholder="No Rekamedis"  value="<?php echo $no_rekamedis; ?>"/></td>
+               <td width='200'>No RM</td>
+               <td><?php echo $row['no_rekamedis'] ?></td>
             </tr>
             <tr>
-               <td width='200'>Nama <?php echo form_error('nama_pasien') ?></td>
-               <td><input type="text" class="form-control" name="nama_pasien" id="nama_pasien" placeholder="Nama Pasien"  value="<?php echo $nama_pasien; ?>"/></td>
+               <td width='200'>Nama</td>
+               <td><?php echo $pendaftaran['nama_pasien'] ?></td>
             </tr>
             <tr>
-               <td width='200'>Alamat <?php echo form_error('alamat') ?></td>
-               <td><input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat"  value="<?php echo $alamat; ?>"/></td>
+               <td width='200'>Alamat</td>
+               <td><?php echo $pendaftaran['alamat'] ?></td>
             </tr>
             <tr>
-               <td width='200'>Jenis Kelamin <?php echo form_error('jenis_kelamin') ?></td>
-               <td><input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin" placeholder="Jenis Kelamin" value="<?php echo $jenis_kelamin; ?>" /></td>
+               <td width='200'>Jenis Kelamin</td>
+               <td><?php echo $pendaftaran['jenis_kelamin'] ?></td>
             </tr>
             <tr>
-               <td width='200'>Dokter Pengirim <?php echo form_error('nama_dokter') ?></td>
-               <td><input type="text" class="form-control" name="nama_dokter" id="nama_dokter" placeholder="Nama Dokter"  value="<?php echo $kode_dokter; ?>"/></td>
+               <td width='200'>Dokter Pengirim</td>
+               <td><?php echo $pendaftaran['nama_dokter'] ?></td>
             </tr>
             <tr>
-               <td width='200'>Pengambilan Sampel <?php echo form_error('tgl_ambil_sampel') ?></td>
+               <td width='200'>Pengambilan Sampel</td>
                <td><input type="date" class="form-control" name="tgl_ambil_sampel" id="tgl_ambil_sampel"  /></td>
             </tr>
             <tr>
-               <td width='200'>Penyerahan Hasil <?php echo form_error('tgl_peritgl_penyerahan_hasilksa') ?></td>
+               <td width='200'>Penyerahan Hasil</td>
                <td><input type="date" class="form-control" name="tgl_penyerahan_hasil" id="tgl_penyerahan_hasil"  /></td>
             </tr>
 
             <tr>
                <td></td>
                <td> 
-                  <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
+                  <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> Simpan</button> 
                   <a href="<?php echo site_url('lab') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
                </td>
             </tr>
@@ -719,7 +719,7 @@
 
             </div>
          </div>
-      </form>
+      <?php echo form_close(); ?>
    </div>
 </div>
 </div>

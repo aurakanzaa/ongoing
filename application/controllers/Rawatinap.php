@@ -100,11 +100,11 @@ class Rawatinap extends CI_Controller
 
      function cetak(){
 
-    $no_rawat = substr($this->uri->uri_string(3), 31);
-     
-      $sql_data_resep = "SELECT pd.*, pol.nama_poli, dok.nama_dokter, pas.nama_pasien FROM tbl_pendaftaran as pd, tbl_poli as pol, tbl_dokter as dok, tbl_pasien as pas where pd.kode_dokter_penanggung_jawab=dok.kode_dokter AND pd.id_poli=pol.id_poli AND pd.no_rekamedis=pas.no_rekamedis ";
+        $no_rawat = substr($this->uri->uri_string(3), 31);
+        
+        $sql_data_resep = "SELECT pd.*, pol.nama_poli, dok.nama_dokter, pas.nama_pasien FROM tbl_pendaftaran as pd, tbl_poli as pol, tbl_dokter as dok, tbl_pasien as pas where pd.kode_dokter_penanggung_jawab=dok.kode_dokter AND pd.id_poli=pol.id_poli AND pd.no_rekamedis=pas.no_rekamedis ";
 
-    $sql_rekamedis    = "SELECT tr.*,pd.no_rawat,pd.tanggal_daftar 
+        $sql_rekamedis    = "SELECT tr.*,pd.no_rawat,pd.tanggal_daftar 
                         FROM tbl_riwayat_tindakan as tr, tbl_pendaftaran as pd
                         WHERE pd.no_rawat and tr.no_rawat='$no_rawat'";
 
@@ -173,7 +173,7 @@ class Rawatinap extends CI_Controller
         $pdf->Output();
     }
 
-  function cetakantrian($id){
+    function cetakantrian($id){
 
         
         $sql_pasien = $this->Tbl_rawat_inap_model->get_by_id($id);
@@ -354,19 +354,19 @@ class Rawatinap extends CI_Controller
 
     function autofillobat(){
 
-    $nama_obat = $_GET['nama_obat'];
+        $nama_obat = $_GET['nama_obat'];
 
-    $this->db->where('nama_obat',$nama_obat);
+        $this->db->where('nama_obat',$nama_obat);
 
-    $obat = $this->db->get('tbl_obat')->row_array();
+        $obat = $this->db->get('tbl_obat')->row_array();
 
-    $data = array(
+        $data = array(
         'jenis_obat' => $obat['jenis_obat'],
         // 'dosis_aturan_obat' => $obat['dosis_aturan_obat']
         );
 
-    echo json_encode($data);
-   }
+        echo json_encode($data);
+    }
 
 
 
@@ -483,6 +483,34 @@ class Rawatinap extends CI_Controller
         $this->template->load('template','tindakanberobat/tbl_tindakanberobat_form', $data);
     }
 
+    public function create_action() 
+    {
+
+        $tanggal_daftar = $this->input->post('tanggal_daftar',TRUE);
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->create();
+        } else {
+            $data = array(
+        'no_rawat' => $this->input->post('no_rawat', TRUE),
+        'no_registrasi' => $this->input->post('no_registrasi',TRUE),
+        'no_rekamedis' => $this->input->post('no_rekamedis',TRUE),
+        'tanggal_daftar' => date('d-m-Y', strtotime($tanggal_daftar)),
+        'kode_dokter_penanggung_jawab' =>  $this->getKodeDokter($this->input->post('kode_dokter_penanggung_jawab',TRUE)),
+        'id_poli' => $this->input->post('id_poli',TRUE),
+        'nama_penanggung_jawab' => $this->input->post('nama_penanggung_jawab',TRUE),
+        'hubungan_dengan_penanggung_jawab' => $this->input->post('hubungan_dengan_penanggung_jawab',TRUE),
+        'alamat_penanggung_jawab' => $this->input->post('alamat_penanggung_jawab',TRUE)
+        );
+
+            $this->Tbl_rawat_inap_model->insert($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Data Berhasil Masuk
+            </div>');  
+            redirect(site_url('tindakanberobat'));
+        }
+    }
+
     function cetakrekamedis(){
 
         $no_rawat = substr($this->uri->uri_string(3), 31);
@@ -573,13 +601,13 @@ class Rawatinap extends CI_Controller
 
     function cetakresepobat(){
 
-    $no_rawat = substr($this->uri->uri_string(3), 31);
-      $sql_daftar = "SELECT pd.no_rekamedis, pd.no_rawat,pd.tanggal_daftar,ps.nama_pasien, td.nama_dokter FROM tbl_pendaftaran as pd, tbl_pasien as ps, tbl_dokter as td WHERE pd.no_rekamedis = ps.no_rekamedis and td.kode_dokter = pd.kode_dokter_penanggung_jawab and pd.no_rawat = '$no_rawat'";
-      $sql_penyakit = "SELECT pd.no_rekamedis, pd.no_rawat,dg.nama_penyakit FROM tbl_pendaftaran as pd, tbl_diagnosa_penyakit as dg WHERE pd.no_rekamedis and pd.no_rawat = '$no_rawat'";
-      $sql_poli_input_rekmed = "SELECT pd.no_rawat,pd.id_poli, p.nama_poli FROM tbl_pendaftaran as pd, tbl_poli as p WHERE pd.no_rawat = '$no_rawat' AND pd.id_poli = p.id_poli";
-      $sql_data_resep = "SELECT rt.nama_obat, rt.jenis_obat,rt.dosis_aturan_obat,rt.jumlah_obat,rt.no_rawat,rt.tanggal, pkt.nama_pasien FROM tbl_resep_obat as rt, tbl_pasien as pkt WHERE rt.no_rawat = '$no_rawat' AND rt.no_rekamedis = pkt.no_rekamedis";
+        $no_rawat = substr($this->uri->uri_string(3), 31);
+        $sql_daftar = "SELECT pd.no_rekamedis, pd.no_rawat,pd.tanggal_daftar,ps.nama_pasien, td.nama_dokter FROM tbl_pendaftaran as pd, tbl_pasien as ps, tbl_dokter as td WHERE pd.no_rekamedis = ps.no_rekamedis and td.kode_dokter = pd.kode_dokter_penanggung_jawab and pd.no_rawat = '$no_rawat'";
+        $sql_penyakit = "SELECT pd.no_rekamedis, pd.no_rawat,dg.nama_penyakit FROM tbl_pendaftaran as pd, tbl_diagnosa_penyakit as dg WHERE pd.no_rekamedis and pd.no_rawat = '$no_rawat'";
+        $sql_poli_input_rekmed = "SELECT pd.no_rawat,pd.id_poli, p.nama_poli FROM tbl_pendaftaran as pd, tbl_poli as p WHERE pd.no_rawat = '$no_rawat' AND pd.id_poli = p.id_poli";
+        $sql_data_resep = "SELECT rt.nama_obat, rt.jenis_obat,rt.dosis_aturan_obat,rt.jumlah_obat,rt.no_rawat,rt.tanggal, pkt.nama_pasien FROM tbl_resep_obat as rt, tbl_pasien as pkt WHERE rt.no_rawat = '$no_rawat' AND rt.no_rekamedis = pkt.no_rekamedis";
 
-    $sql_rekamedis    = "SELECT tr.*,pd.no_rawat,pd.tanggal_daftar 
+        $sql_rekamedis    = "SELECT tr.*,pd.no_rawat,pd.tanggal_daftar 
                         FROM tbl_riwayat_tindakan as tr, tbl_pendaftaran as pd
                         WHERE pd.no_rawat and tr.no_rawat='$no_rawat'";
 
@@ -653,7 +681,7 @@ class Rawatinap extends CI_Controller
       $sql_data_rujukan = "SELECT nama_penyakit, diagnosa, poli_tujuan FROM tbl_rujukan where no_rawat = '$no_rawat'";
       $sql_data_tindakan = "SELECT rt.id_poli, rt.kode_penyakit,rt.kode_tindakan,rt.no_rawat,rt.hasil_periksa,rt.nama_obat,rt.tanggal,p.nama_poli, pkt.nama_penyakit, t.nama_tindakan FROM tbl_riwayat_tindakan as rt, tbl_tindakan as t, tbl_poli as p, tbl_diagnosa_penyakit as pkt WHERE rt.no_rawat = '$no_rawat' AND rt.kode_tindakan = t.kode_tindakan AND rt.id_poli = p.id_poli AND rt.kode_penyakit = pkt.kode_diagnosa";
 
-    $sql_rekamedis    = "SELECT tr.*,pd.no_rawat,pd.tanggal_daftar 
+         $sql_rekamedis    = "SELECT tr.*,pd.no_rawat,pd.tanggal_daftar 
                         FROM tbl_riwayat_tindakan as tr, tbl_pendaftaran as pd
                         WHERE pd.no_rawat and tr.no_rawat='$no_rawat'";
 
@@ -724,33 +752,7 @@ class Rawatinap extends CI_Controller
         return $dokter['kode_dokter'];
     }
     
-    public function create_action() 
-    {
-
-        $tanggal_daftar = $this->input->post('tanggal_daftar',TRUE);
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-        'no_rawat' => $this->input->post('no_rawat', TRUE),
-        'no_registrasi' => $this->input->post('no_registrasi',TRUE),
-        'no_rekamedis' => $this->input->post('no_rekamedis',TRUE),
-        'tanggal_daftar' => date('d-m-Y', strtotime($tanggal_daftar)),
-        'kode_dokter_penanggung_jawab' =>  $this->getKodeDokter($this->input->post('kode_dokter_penanggung_jawab',TRUE)),
-        'id_poli' => $this->input->post('id_poli',TRUE),
-        'nama_penanggung_jawab' => $this->input->post('nama_penanggung_jawab',TRUE),
-        'hubungan_dengan_penanggung_jawab' => $this->input->post('hubungan_dengan_penanggung_jawab',TRUE),
-        'alamat_penanggung_jawab' => $this->input->post('alamat_penanggung_jawab',TRUE)
-        );
-
-            $this->Tbl_rawat_inap_model->insert($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success">Data Berhasil Masuk
-            </div>');  
-            redirect(site_url('tindakanberobat'));
-        }
-    }
+    
     
     public function update($id) 
     {

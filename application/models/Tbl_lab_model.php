@@ -91,25 +91,160 @@ class Tbl_lab_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
-    // insert data
-    function insert($data)
-    {
-        $this->db->insert($this->table, $data);
+    public function selectPendaftaran($id){
+        $this->db->select('*');
+		$this->db->from('tbl_pendaftaran');
+		$this->db->where('no_registrasi', $id);
+		$query = $this->db->get();
+
+		return $query->result();
+    }
+    public function create(){
+        $data = array(
+            
+            'no_reg' => $this->input->post('no_reg'),
+            'no_rekamedis' => $this->input->post('no_rekamedis'),
+            'nama_pasien' => $this->input->post('nama_pasien'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'alamat' => $this->input->post('alamat'),
+            'tgl_periksa' => $this->input->post('tgl_periksa'),
+            'kode_dokter' => $this->input->post('kode_dokter'),
+            'tgl_ambil_sampel' => $this->input->post('tgl_ambil_sampel'),
+            'tgl_penyerahan_hasil' => $this->input->post('tgl_penyerahan_hasil'),
+
+            // 1
+            'hb_l' => $this->input->post('hb_l'),
+            'hb_p' => $this->input->post('hb_p'),
+            'leucosit' => $this->input->post('leucosit'),
+            'eritrosit_l' => $this->input->post('eritrosit_l'),
+            'eritrosit_p' => $this->input->post('eritrosit_p'),
+            'led_l' => $this->input->post('led_l'),
+            'led_p' => $this->input->post('led_p'),
+            'trombosit' => $this->input->post('trombosit'),
+            'hematrocit_l' => $this->input->post('hematrocit_l'),
+            'hematrocit_p' => $this->input->post('hematrocit_p'),
+            'mcv' => $this->input->post('mcv'),
+            'mhc' => $this->input->post('mhc'),
+            'mchc' => $this->input->post('mchc'),
+            'eosinofil' => $this->input->post('eosinofil'),
+            'basofil' => $this->input->post('basofil'),
+            'stab' => $this->input->post('stab'),
+            'segmen' => $this->input->post('segmen'),
+            'limposit' => $this->input->post('limposit'),
+            'monosit' => $this->input->post('monosit'),
+
+            // 2
+            'widal_h' => $this->input->post('widal_h'),
+            'widal_o' => $this->input->post('widal_o'),
+            'widal_pa' => $this->input->post('widal_pa'),
+            'widal_pb' => $this->input->post('widal_pb'),
+            'widal_hiv' => $this->input->post('widal_hiv'),
+            'ppt' => $this->input->post('ppt'),
+            'goldar' => $this->input->post('goldar'),
+            'hbsag' => $this->input->post('hbsag'),
+            'syphilis' => $this->input->post('syphilis'),
+            'nsi' => $this->input->post('nsi'),
+
+            // 3 
+            'glucosa_puasa' => $this->input->post('glucosa_puasa'),
+            'glucosa_2jam' => $this->input->post('glucosa_2jam'),
+            'glucosa_sewaktu' => $this->input->post('glucosa_sewaktu'),
+            'uric_acid_l' => $this->input->post('uric_acid_l'),
+            'uric_acid_p' => $this->input->post('uric_acid_p'),
+            'cholestrol' => $this->input->post('cholestrol'),
+
+            // 4
+
+            // 5
+            'warna' => $this->input->post('warna'),
+            'bentuk' => $this->input->post('bentuk'),
+            'konsistensi' => $this->input->post('konsistensi'),
+            'amoeba' => $this->input->post('amoeba'),
+            'arytrocit' => $this->input->post('arytrocit'),
+            'leukosit' => $this->input->post('leukosit'),
+            'telur_cacing' => $this->input->post('telur_cacing'),
+            'malaria' => $this->input->post('malaria'),
+            'bta' => $this->input->post('bta'),
+        );
+        $this->db->insert('lab', $data);
     }
 
-    // update data
-    function update($id, $data)
-    {
-        $this->db->where($this->id, $id);
-        $this->db->update($this->table, $data);
-    }
+    public function update($id)
+	{
+		$data = array(
+            
+            'no_reg' => $this->input->post('no_reg'),
+            'no_rekamedis' => $this->input->post('no_rekamedis'),
+            'nama_pasien' => $this->input->post('nama_pasien'),
+            'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+            'alamat' => $this->input->post('alamat'),
+            'tgl_periksa' => $this->input->post('tgl_periksa'),
+            'kode_dokter' => $this->input->post('kode_dokter'),
+            'tgl_ambil_sampel' => $this->input->post('tgl_ambil_sampel'),
+            'tgl_penyerahan_hasil' => $this->input->post('tgl_penyerahan_hasil'),
 
-    // delete data
-    function delete($id)
-    {
-        $this->db->where($this->id, $id);
-        $this->db->delete($this->table);
+            // 1
+            'hb_l' => $this->input->post('hb_l'),
+            'hb_p' => $this->input->post('hb_p'),
+            'leucosit' => $this->input->post('leucosit'),
+            'eritrosit_l' => $this->input->post('eritrosit_l'),
+            'eritrosit_p' => $this->input->post('eritrosit_p'),
+            'led_l' => $this->input->post('led_l'),
+            'led_p' => $this->input->post('led_p'),
+            'trombosit' => $this->input->post('trombosit'),
+            'hematrocit_l' => $this->input->post('hematrocit_l'),
+            'hematrocit_p' => $this->input->post('hematrocit_p'),
+            'mcv' => $this->input->post('mcv'),
+            'mhc' => $this->input->post('mhc'),
+            'mchc' => $this->input->post('mchc'),
+            'eosinofil' => $this->input->post('eosinofil'),
+            'basofil' => $this->input->post('basofil'),
+            'stab' => $this->input->post('stab'),
+            'segmen' => $this->input->post('segmen'),
+            'limposit' => $this->input->post('limposit'),
+            'monosit' => $this->input->post('monosit'),
+
+            // 2
+            'widal_h' => $this->input->post('widal_h'),
+            'widal_o' => $this->input->post('widal_o'),
+            'widal_pa' => $this->input->post('widal_pa'),
+            'widal_pb' => $this->input->post('widal_pb'),
+            'widal_hiv' => $this->input->post('widal_hiv'),
+            'ppt' => $this->input->post('ppt'),
+            'goldar' => $this->input->post('goldar'),
+            'hbsag' => $this->input->post('hbsag'),
+            'syphilis' => $this->input->post('syphilis'),
+            'nsi' => $this->input->post('nsi'),
+
+            // 3 
+            'glucosa_puasa' => $this->input->post('glucosa_puasa'),
+            'glucosa_2jam' => $this->input->post('glucosa_2jam'),
+            'glucosa_sewaktu' => $this->input->post('glucosa_sewaktu'),
+            'uric_acid_l' => $this->input->post('uric_acid_l'),
+            'uric_acid_p' => $this->input->post('uric_acid_p'),
+            'cholestrol' => $this->input->post('cholestrol'),
+
+            // 4
+
+            // 5
+            'warna' => $this->input->post('warna'),
+            'bentuk' => $this->input->post('bentuk'),
+            'konsistensi' => $this->input->post('konsistensi'),
+            'amoeba' => $this->input->post('amoeba'),
+            'arytrocit' => $this->input->post('arytrocit'),
+            'leukosit' => $this->input->post('leukosit'),
+            'telur_cacing' => $this->input->post('telur_cacing'),
+            'malaria' => $this->input->post('malaria'),
+            'bta' => $this->input->post('bta'),
+        );
+		$this->db->where('no_reg', $id);
+		$this->db->update('lab', $data);
     }
+    
+    public function delete($id)
+	{
+		$this->db->delete('lab', array('no_reg' => $id));
+	}
 
 }
 
