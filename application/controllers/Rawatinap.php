@@ -58,7 +58,7 @@ class Rawatinap extends CI_Controller
             'start' => $start,
             'level' => $level,
         );
-        $this->template->load('template','tindakanberobat/tbl_tindakanberobat_list', $data);
+        $this->template->load('template','tindakanrawatinap/tbl_tindakanrawatinap_list', $data);
     }
 
     function detail($no_rekmedis){
