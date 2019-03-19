@@ -6,7 +6,7 @@
       </div>
       <?php echo form_open('Lab/create/'.$this->uri->segment(3)); ?> 
          <!-- halo -->
-         <table class='table table-bordered'>
+         <!-- <table class='table table-bordered'>
     
             <tr>
                <td width='200'>Tgl Pemerikasaan</td>
@@ -50,7 +50,7 @@
                </td>
             </tr>
 
-         </table>
+         </table> -->
 
         <!-- button lab -->
          <div class="row">
