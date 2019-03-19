@@ -14,10 +14,35 @@ class Lab extends CI_Controller
 	    $this->load->library('datatables');
     }
 
-    public function index()
-    {
-        $this->template->load('template','lab/tbl_lab_list');
-    } 
+
+    public function index(){
+        $data['riwayat_tindakan']=$this->Tbl_lab_model->getTindakan();
+        
+        // $this->load->view('template');
+        $this->template->load('template','lab/tbl_lab_list', $data);
+    }
+
+    public function create($id){
+		$this->load->helper('url','form');	
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_rekamedis', 'ID', 'trim|required');
+		if($this->form_validation->run()==FALSE){	
+            $data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $this->template->load('template','lab/tbl_lab_form', $data);	
+		}else{
+			$this->load->model('Tbl_lab_model');
+            $id=$this->Tbl_lab_model->createData();
+            //$data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $data['pasien']=$this->Tbl_lab_model->select($id);
+            //var_dump($data['pasien']);
+			$this->session->set_flashdata('sukses','1');	
+            $this->template->load('template','lab/hematologi_form', $data);
+		}
+    }
+
+    
+
+
 
     // FORM LAB ===================================================
     public function hematologi()
@@ -46,30 +71,98 @@ class Lab extends CI_Controller
     }
     // FORM LAB END ==========================================================
 
-    
-    public function json() {
-        header('Content-Type: application/json');
-        echo $this->Tbl_lab_model->json();
+    // CREATE LAB ==============================================================
+    public function createHematologi($id){
+		$this->load->helper('url','form');	
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_rekamedis', 'ID', 'trim|required');
+		if($this->form_validation->run()==FALSE){	
+            $data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $this->template->load('template','lab/hematologi_form', $data);	
+		}else{
+			$this->load->model('Tbl_lab_model');
+            $id=$this->Tbl_lab_model->createHema();
+            //$data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $data['pasien']=$this->Tbl_lab_model->select($id);
+            //var_dump($data['pasien']);
+			$this->session->set_flashdata('sukses','1');	
+            $this->template->load('template','lab/hematologi_form', $data);
+		}
     }
 
-    public function create(){
-		$session_data = $this->session->userdata('sesslogin');
-        
-        // load model
-        // $this->load->model('Tbl_pendaftaran_model');
-        // $data["pendaftaran"] = $this->Tbl_pendaftaran_model->selectPendaftaran($pendaftaran);
-
+    public function createImuno($id){
 		$this->load->helper('url','form');	
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('no_reg', '', 'trim|required');
-        $this->form_validation->set_rules('no_rekamedis', '', 'trim|required');
-        $this->form_validation->set_rules('nama_pasien', '', 'trim|required');
-		$this->form_validation->set_rules('alamat', '', 'trim');
-        $this->form_validation->set_rules('tgl_periksa', '', 'trim|required');
-        $this->form_validation->set_rules('kode_dokter', '', 'trim|required');
-        $this->form_validation->set_rules('tgl_ambil_sampel', '', 'trim|required');
-        $this->form_validation->set_rules('tgl_penyerahan_hasil', '', 'trim|required');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_rekamedis', 'ID', 'trim|required');
+		if($this->form_validation->run()==FALSE){	
+            $data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $this->template->load('template','lab/imuno_form', $data);	
+		}else{
+			$this->load->model('Tbl_lab_model');
+            $id=$this->Tbl_lab_model->createI();
+            //$data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $data['pasien']=$this->Tbl_lab_model->select($id);
+            //var_dump($data['pasien']);
+			$this->session->set_flashdata('sukses','1');	
+            $this->template->load('template','lab/imuno_form', $data);
+		}
+    }
 
+    public function createKimia($id){
+		$this->load->helper('url','form');	
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_rekamedis', 'ID', 'trim|required');
+		if($this->form_validation->run()==FALSE){	
+            $data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $this->template->load('template','lab/kimiaklinik_form', $data);	
+		}else{
+			$this->load->model('Tbl_lab_model');
+            $id=$this->Tbl_lab_model->createK();
+            //$data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $data['pasien']=$this->Tbl_lab_model->select($id);
+            //var_dump($data['pasien']);
+			$this->session->set_flashdata('sukses','1');	
+            $this->template->load('template','lab/kimiaklinik_form', $data);
+		}
+    }
+
+    public function createUrine($id){
+		$this->load->helper('url','form');	
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_rekamedis', 'ID', 'trim|required');
+		if($this->form_validation->run()==FALSE){	
+            $data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $this->template->load('template','lab/urine_form', $data);	
+		}else{
+			$this->load->model('Tbl_lab_model');
+            $id=$this->Tbl_lab_model->createU();
+            //$data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $data['pasien']=$this->Tbl_lab_model->select($id);
+            //var_dump($data['pasien']);
+			$this->session->set_flashdata('sukses','1');	
+            $this->template->load('template','lab/urine_form', $data);
+		}
+    }
+
+    public function createParasitologi($id){
+		$this->load->helper('url','form');	
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('no_rekamedis', 'ID', 'trim|required');
+		if($this->form_validation->run()==FALSE){	
+            $data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $this->template->load('template','lab/parasitologi_form', $data);	
+		}else{
+			$this->load->model('Tbl_lab_model');
+            $id=$this->Tbl_lab_model->createP();
+            //$data['lab']=$this->Tbl_lab_model->getTindakanById($id);
+            $data['pasien']=$this->Tbl_lab_model->select($id);
+            //var_dump($data['pasien']);
+			$this->session->set_flashdata('sukses','1');	
+            $this->template->load('template','lab/parasitologi_form', $data);
+		}
+    }
+
+    public function createHematologi2(){
         // 1
         $this->form_validation->set_rules('hb_l', '', 'trim');
         $this->form_validation->set_rules('hb_p', '', 'trim');
@@ -90,7 +183,9 @@ class Lab extends CI_Controller
         $this->form_validation->set_rules('segmen', '', 'trim');
         $this->form_validation->set_rules('limposit', '', 'trim');
         $this->form_validation->set_rules('monosit', '', 'trim');
+    }
 
+    public function createImunoserologi2(){
         // 2
         $this->form_validation->set_rules('widal_h', '', 'trim');
         $this->form_validation->set_rules('widal_o', '', 'trim');
@@ -102,7 +197,9 @@ class Lab extends CI_Controller
         $this->form_validation->set_rules('hbsag', '', 'trim');
         $this->form_validation->set_rules('syphilis', '', 'trim');
         $this->form_validation->set_rules('nsi', '', 'trim');
+    }
 
+    public function createKimia2(){
         // 3 
         $this->form_validation->set_rules('glucosa_puasa', '', 'trim');
         $this->form_validation->set_rules('glucosa_2jam', '', 'trim');
@@ -110,9 +207,13 @@ class Lab extends CI_Controller
         $this->form_validation->set_rules('uric_acid_l', '', 'trim');
         $this->form_validation->set_rules('uric_acid_p', '', 'trim');
         $this->form_validation->set_rules('cholestrol', '', 'trim');
+    }
 
-        // 4
+    public function createUrine2(){
 
+    }
+
+    public function createParasitologi2(){
         // 5
         $this->form_validation->set_rules('warna', '', 'trim');
         $this->form_validation->set_rules('bentuk', '', 'trim');
@@ -123,17 +224,6 @@ class Lab extends CI_Controller
         $this->form_validation->set_rules('telur_cacing', '', 'trim');
         $this->form_validation->set_rules('malaria', '', 'trim');
         $this->form_validation->set_rules('bta', '', 'trim');
-
-		if($this->form_validation->run()==FALSE){	
-			// $this->load->view('partials/header');
-			// $this->load->view('lab/tbl_lab_form', $data);
-            // $this->load->view('partials/footer');		
-            $this->template->load('template','lab/tbl_lab_form', $data);
-		}else{
-			$this->load->model('Tbl_lab_model');
-			$this->Tbl_lab_model->create();
-			$this->session->set_flashdata('sukses','1');	
-			redirect('lab','refresh');
-		}
-	}
+    }
+    // CREATE LAB END ==========================================================
 }
